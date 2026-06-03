@@ -1,47 +1,45 @@
-# Security
+# 安全说明
 
-## IMPORTANT
+## 重要提示
 
-We do not accept AI generated security reports. We receive a large number of
-these and we absolutely do not have the resources to review them all. If you
-submit one that will be an automatic ban from the project.
+我们不接受 AI 生成的安全报告。此类报告数量巨大，我们根本没有资源逐一审阅。提交 AI 生成的安全报告将被自动封禁，禁止参与本项目。
 
-## Threat Model
+## 威胁模型
 
-### Overview
+### 概述
 
-OpenCode is an AI-powered coding assistant that runs locally on your machine. It provides an agent system with access to powerful tools including shell execution, file operations, and web access.
+OpenCode 是一个运行在你本地机器上的 AI 编程助手。它提供了一个智能体系统，可以访问包括 Shell 执行、文件操作和网络访问在内的强大工具。
 
-### No Sandbox
+### 无沙箱机制
 
-OpenCode does **not** sandbox the agent. The permission system exists as a UX feature to help users stay aware of what actions the agent is taking - it prompts for confirmation before executing commands, writing files, etc. However, it is not designed to provide security isolation.
+OpenCode **没有**对智能体进行沙箱隔离。权限系统的存在是为了帮助用户了解智能体正在执行的操作——它会在执行命令、写入文件等操作前弹出确认提示。但它并非设计用于提供安全隔离。
 
-If you need true isolation, run OpenCode inside a Docker container or VM.
+如果你需要真正的隔离，请在 Docker 容器或虚拟机中运行 OpenCode。
 
-### Server Mode
+### 服务器模式
 
-Server mode is opt-in only. When enabled, set `OPENCODE_SERVER_PASSWORD` to require HTTP Basic Auth. Without this, the server runs unauthenticated (with a warning). It is the end user's responsibility to secure the server - any functionality it provides is not a vulnerability.
+服务器模式仅限主动选择启用。启用后，请设置 `OPENCODE_SERVER_PASSWORD` 以启用 HTTP Basic 认证。不设置密码时，服务器将在未经认证的状态下运行（并显示警告）。保护服务器的安全是最终用户自己的责任——该模式下提供的任何功能均不视为漏洞。
 
-### Out of Scope
+### 不在范围内的项目
 
-| Category                        | Rationale                                                               |
-| ------------------------------- | ----------------------------------------------------------------------- |
-| **Server access when opted-in** | If you enable server mode, API access is expected behavior              |
-| **Sandbox escapes**             | The permission system is not a sandbox (see above)                      |
-| **LLM provider data handling**  | Data sent to your configured LLM provider is governed by their policies |
-| **MCP server behavior**         | External MCP servers you configure are outside our trust boundary       |
-| **Malicious config files**      | Users control their own config; modifying it is not an attack vector    |
+| 类别 | 说明 |
+| --- | --- |
+| **主动启用的服务器访问** | 如果你启用了服务器模式，API 访问属于预期行为 |
+| **沙箱逃逸** | 权限系统不是沙箱（见上文） |
+| **LLM 提供商的数据处理** | 发送到你配置的 LLM 提供商的数据受其隐私政策约束 |
+| **MCP 服务器行为** | 你配置的外部 MCP 服务器不在我们的信任边界之内 |
+| **恶意配置文件** | 用户掌控自己的配置；修改自己的配置文件不属于攻击向量 |
 
 ---
 
-# Reporting Security Issues
+# 报告安全问题
 
-We appreciate your efforts to responsibly disclose your findings, and will make every effort to acknowledge your contributions.
+我们感谢你为负责任地披露发现所做的努力，并将尽力认可你的贡献。
 
-To report a security issue, please use the GitHub Security Advisory ["Report a Vulnerability"](https://github.com/anomalyco/opencode/security/advisories/new) tab.
+要报告安全问题，请使用 GitHub Security Advisory 的 ["报告漏洞"](https://github.com/anomalyco/opencode/security/advisories/new) 选项卡。
 
-The team will send a response indicating the next steps in handling your report. After the initial reply to your report, the security team will keep you informed of the progress towards a fix and full announcement, and may ask for additional information or guidance.
+团队将回复你，告知处理报告的后续步骤。在初次回复后，安全团队将持续向你通报修复进展和公告发布情况，并可能向你索取更多信息或指导。
 
-## Escalation
+## 问题升级
 
-If you do not receive an acknowledgement of your report within 6 business days, you may send an email to security@anoma.ly
+如果你在 6 个工作日内未收到报告的确认回执，可以发送邮件至 security@anoma.ly
